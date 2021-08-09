@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
 from app import db
 
@@ -10,6 +11,12 @@ class User(db.Model):
 
   def __repr__(self):
     return f"<User {self.username:r}>"
+
+  def set_password(self,pw):
+    self.password_hash=generate_password_hash(pw)
+
+  def check_password(self,pw):
+    return check_password_hash(self.password_hash,pw)
 
 
 class Post(db.Model):
