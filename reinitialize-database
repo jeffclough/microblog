@@ -1,0 +1,5 @@
+#!/bin/zsh
+[ -f app.db ] && ts app.db migrations
+flask db init
+flask db migrate -m "re-initializing database"
+flask db upgrade
